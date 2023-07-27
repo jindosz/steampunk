@@ -1124,10 +1124,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2693746220d8b364586f01844af35e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWalkSpeed: 3
-  maxRunSpeed: 7
+  maxWalkSpeed: 2
+  maxRunSpeed: 5
   jump: 150
-  walkForce: 10
+  walkForce: 1.5
 --- !u!95 &1425020982
 Animator:
   serializedVersion: 5
