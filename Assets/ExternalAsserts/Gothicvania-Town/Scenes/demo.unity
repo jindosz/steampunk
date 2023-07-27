@@ -1126,7 +1126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxWalkSpeed: 3
   maxRunSpeed: 7
-  jump: 30
+  jump: 150
+  walkForce: 10
 --- !u!95 &1425020982
 Animator:
   serializedVersion: 5
