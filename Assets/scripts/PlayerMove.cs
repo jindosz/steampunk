@@ -127,7 +127,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     public bool CheckGround()
-    { // 응애
+    {
         float distanceToTheGround = GetComponent<Collider2D>().bounds.extents.y;
         return BoxCastDrawer.BoxCastAndDraw(
             new Vector2(transform.position.x, transform.position.y),
