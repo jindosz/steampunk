@@ -5,12 +5,14 @@ public class PlayerMove : MonoBehaviour
     public float maxWalkSpeed;
     public float maxRunSpeed;
     public float jump;
+    public float rollingPower;
     public float walkForce;
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
 
     private float jumpTime = 10f;
+    private float rollTime = 10f;
 
     void Awake()
     {
@@ -21,6 +23,12 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Q) && rollTime > 0.7f)
+        {
+            anim.SetBool("isRolling", true);
+            rollTime = 0f;
+        }
+
         LimitVelocity();
 
         if (Input.GetButtonDown("Jump"))
@@ -68,43 +76,44 @@ public class PlayerMove : MonoBehaviour
         rigid.AddForce(Vector2.right * h * walkForce, ForceMode2D.Impulse);
 
         jumpTime += Time.deltaTime;
+        rollTime += Time.deltaTime;
 
         if (jumpTime <= 0.2f)
             rigid.AddForce(Vector2.up * jump, ForceMode2D.Force);
 
-        // if (run == false && rigid.velocity.x > maxWalkSpeed)
-        //     rigid.velocity = new Vector2(maxWalkSpeed, rigid.velocity.y);
-        // else if (run == false && rigid.velocity.x < maxWalkSpeed * (-1))
-        //     rigid.velocity = new Vector2(maxWalkSpeed * (-1), rigid.velocity.y);
-
-        // if (run == true && rigid.velocity.x > maxRunSpeed)
-        //     rigid.velocity = new Vector2(maxRunSpeed, rigid.velocity.y);
-        // else if (run == true && rigid.velocity.x < maxRunSpeed * (-1))
-        //     rigid.velocity = new Vector2(maxRunSpeed * (-1), rigid.velocity.y);
+        if (rollTime <= 0.6f)
+        {
+            rigid.AddForce(Vector2.right * rollingPower * Mathf.Sign(h), ForceMode2D.Force);
+        }
+        else
+            anim.SetBool("isRolling", false);
     }
 
     void LimitVelocity()
     {
         bool run = Input.GetKey(KeyCode.LeftControl);
 
-        if (run)
+        if (rollTime > 0.6f)
         {
-            if (Mathf.Abs(rigid.velocity.x) > maxRunSpeed)
+            if (run)
             {
-                rigid.velocity = new Vector2(
-                    Mathf.Sign(rigid.velocity.x) * maxRunSpeed,
-                    rigid.velocity.y
-                );
+                if (Mathf.Abs(rigid.velocity.x) > maxRunSpeed)
+                {
+                    rigid.velocity = new Vector2(
+                        Mathf.Sign(rigid.velocity.x) * maxRunSpeed,
+                        rigid.velocity.y
+                    );
+                }
             }
-        }
-        else
-        {
-            if (Mathf.Abs(rigid.velocity.x) > maxWalkSpeed)
+            else
             {
-                rigid.velocity = new Vector2(
-                    Mathf.Sign(rigid.velocity.x) * maxWalkSpeed,
-                    rigid.velocity.y
-                );
+                if (Mathf.Abs(rigid.velocity.x) > maxWalkSpeed)
+                {
+                    rigid.velocity = new Vector2(
+                        Mathf.Sign(rigid.velocity.x) * maxWalkSpeed,
+                        rigid.velocity.y
+                    );
+                }
             }
         }
     }

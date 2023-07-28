@@ -1111,7 +1111,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1425020981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1127,6 +1127,7 @@ MonoBehaviour:
   maxWalkSpeed: 2
   maxRunSpeed: 5
   jump: 150
+  rollingPower: 10
   walkForce: 1.5
 --- !u!95 &1425020982
 Animator:
