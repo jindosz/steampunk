@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 367457901}
   - component: {fileID: 367457902}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Steampunk_UI_HP_Bars_9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 750174936}
   - component: {fileID: 750174934}
   - component: {fileID: 750174933}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -539,7 +539,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1101434467}
   - component: {fileID: 1101434468}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Steampunk_UI_HP_Bars_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -818,7 +818,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1327720122}
   - component: {fileID: 1327720123}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Steampunk_UI_HP_Bars_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -902,7 +902,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1383638086}
   - component: {fileID: 1383638087}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Steampunk_UI_HP_Bars_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -990,7 +990,7 @@ GameObject:
   - component: {fileID: 1425020978}
   - component: {fileID: 1425020981}
   - component: {fileID: 1425020982}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1127,7 +1127,7 @@ MonoBehaviour:
   maxWalkSpeed: 2
   maxRunSpeed: 5
   jump: 150
-  rollingPower: 10
+  rollingPower: 100
   walkForce: 1.5
 --- !u!95 &1425020982
 Animator:
@@ -1160,7 +1160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1458262176}
   - component: {fileID: 1458262177}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Steampunk_UI_HP_Bars_16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1277,7 +1277,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1948031417}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}

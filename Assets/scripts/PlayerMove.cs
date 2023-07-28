@@ -13,6 +13,7 @@ public class PlayerMove : MonoBehaviour
 
     private float jumpTime = 10f;
     private float rollTime = 10f;
+    bool run = false;
 
     void Awake()
     {
@@ -23,15 +24,22 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && rollTime > 0.7f)
+        CheckGround();
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            anim.SetBool("isRolling", true);
+            run = !run;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q) && rollTime > 0.7f && CheckGround())
+        {
+            anim.SetTrigger("Roll");
             rollTime = 0f;
         }
 
         LimitVelocity();
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && CheckGround())
         {
             jumpTime = 0f;
             anim.SetBool("isJumping", true);
@@ -73,7 +81,8 @@ public class PlayerMove : MonoBehaviour
     {
         float h = Input.GetAxisRaw("Horizontal");
 
-        rigid.AddForce(Vector2.right * h * walkForce, ForceMode2D.Impulse);
+        if (rollTime > 0.6f)
+            rigid.AddForce(Vector2.right * h * walkForce, ForceMode2D.Impulse);
 
         jumpTime += Time.deltaTime;
         rollTime += Time.deltaTime;
@@ -83,17 +92,16 @@ public class PlayerMove : MonoBehaviour
 
         if (rollTime <= 0.6f)
         {
-            rigid.AddForce(Vector2.right * rollingPower * Mathf.Sign(h), ForceMode2D.Force);
+            rigid.AddForce(
+                Vector2.right * rollingPower * (spriteRenderer.flipX ? -1 : 1),
+                ForceMode2D.Force
+            );
         }
-        else
-            anim.SetBool("isRolling", false);
     }
 
     void LimitVelocity()
     {
-        bool run = Input.GetKey(KeyCode.LeftControl);
-
-        if (rollTime > 0.6f)
+        if (rollTime > 0.55f)
         {
             if (run)
             {
@@ -116,5 +124,18 @@ public class PlayerMove : MonoBehaviour
                 }
             }
         }
+    }
+
+    public bool CheckGround()
+    { // 응애
+        float distanceToTheGround = GetComponent<Collider2D>().bounds.extents.y;
+        return BoxCastDrawer.BoxCastAndDraw(
+            new Vector2(transform.position.x, transform.position.y),
+            new Vector2(0.45f, 0.8f), //Size
+            0f,
+            Vector2.down,
+            distanceToTheGround + 0.05f,
+            ~LayerMask.GetMask("Player")
+        );
     }
 }
